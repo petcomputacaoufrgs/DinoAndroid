@@ -10,12 +10,27 @@ import retrofit2.http.POST
 
 /**
  * Controla a autenticação
- * Created by joao.silva.
+ *
+ * @author joao.silva
  */
 interface Auth {
+
+    /**
+     * Requisita o token de acesso com o token de autenticação
+     *
+     * @param authModel Model contendo o token de autenticação
+     * @return AuthResponseModel com o token de acesso
+     * @author joao.silva
+     */
     @POST("auth/google/")
     fun getAccessToken(@Body authModel: AuthRequestModel): Call<AuthResponseModel>
 
+    /**
+     * Busca pelo nome do usuário
+     *
+     * @return UsernameModel com o nome do usuário logado
+     * @author joao.silva
+     */
     @GET("auth/name/")
     fun name(): Call<UsernameModel>
 }

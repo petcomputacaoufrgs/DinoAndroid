@@ -3,13 +3,11 @@ package br.ufrgs.inf.pet.dinoapp.service
 
 import android.app.Activity
 import android.content.Intent
-import android.util.Log
 import android.widget.Toast
-import androidx.fragment.app.FragmentActivity
 import br.ufrgs.inf.pet.dinoapp.activity.LoginActivity
 import br.ufrgs.inf.pet.dinoapp.activity.MenuActivity
 import br.ufrgs.inf.pet.dinoapp.communication.RetrofitClient
-import br.ufrgs.inf.pet.dinoapp.database.UserController
+import br.ufrgs.inf.pet.dinoapp.database.user.UserController
 import br.ufrgs.inf.pet.dinoapp.model.auth.AuthRequestModel
 import br.ufrgs.inf.pet.dinoapp.model.auth.AuthResponseModel
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -21,8 +19,8 @@ import retrofit2.Response
 
 
 /**
- * Manager of Google Auth data
- * Created by joao.silva.
+ * Administra o login e logout
+ * @author joao.silva
  */
 class AuthService constructor(private val activity : Activity) {
 
@@ -30,19 +28,51 @@ class AuthService constructor(private val activity : Activity) {
 
     private val userController = UserController(activity)
 
+    /**
+     * Busca por login salvo no banco de dados local.
+     * Caso não encontre requisita ao usuário que entre com seu login.
+     *
+     * @author joao.silva
+     */
+    fun searchLogin() {
+        val loginUser = userController.getUser()
+
+        if(loginUser == null){
+            goToLogin()
+        } else {
+            goToMenu()
+        }
+    }
+
+    /**
+     * Realiza o signout do usuário
+     *
+     * @author joao.silva
+     */
     fun onSignOut() {
-        userController.deleteUser()
+        userController.delete()
         googleSignInService.getClient(activity).signOut()
             .addOnCompleteListener(activity) {
                 goToLogin()
             }
     }
 
+    /**
+     * Realiza o signin do usuário
+     *
+     * @author joao.silva
+     */
     fun onSignIn() {
         val signInIntent = googleSignInService.getClient(activity).signInIntent
         activity.startActivityForResult(signInIntent, 0)
     }
 
+    /**
+     * Trata o retorno da API do Google com o token de autenticação para realizar o login do usuário
+     *
+     * @param completedTask response do servidor do Google
+     * @author joao.silva
+     */
     fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             val account = completedTask.getResult(ApiException::class.java)
@@ -51,15 +81,21 @@ class AuthService constructor(private val activity : Activity) {
                 val authCode = account.serverAuthCode
 
                 this.getAccessToken(authCode)
+            } else {
+                Toast.makeText(activity, "Falha ao obter login com o Google.", Toast.LENGTH_SHORT).show()
             }
-            /*TO DO: Tratar erro de login*/
         } catch (e: ApiException) {
-            // TO DO: Tratar erro de login
-            Log.w(FragmentActivity.ACCOUNT_SERVICE, "Erro no login, código: " + e.statusCode)
+            Toast.makeText(activity, "Falha no login com o Google.", Toast.LENGTH_SHORT).show()
         }
 
     }
 
+    /**
+     * Requisita um token de acesso na API utilizando o token de autenticação do Google
+     *
+     * @param token token de acesso gerado pelo Google no signIn
+     * @author joao.silva
+     */
     private fun getAccessToken(token: String?) {
         if (token != null) {
             val authRequestModel = AuthRequestModel(token)
@@ -69,6 +105,7 @@ class AuthService constructor(private val activity : Activity) {
                 .enqueue(object: Callback<AuthResponseModel> {
                     override fun onFailure(call: Call<AuthResponseModel>, t: Throwable) {
                         Toast.makeText(activity, "Falha na comunicação com o servidor.", Toast.LENGTH_SHORT).show()
+                        onSignOut()
                     }
 
                     override fun onResponse(
@@ -76,29 +113,48 @@ class AuthService constructor(private val activity : Activity) {
                         response: Response<AuthResponseModel>
                     ) {
                         if (response.isSuccessful && response.body() != null) {
-                            saveLogin(response.body()!!.accessToken, response.body()!!.expireIn)
+                            saveLogin(response.body()!!.accessToken)
                             goToMenu()
                         } else {
                             Toast.makeText(activity, "Falha na autenticação com a API.", Toast.LENGTH_SHORT).show()
+                            onSignOut()
                         }
                     }
                 })
         } else {
-            //TO-DO Tratar erro
+            Toast.makeText(activity, "Falha ao obter autenticação com o Google.", Toast.LENGTH_SHORT).show()
+            onSignOut()
         }
     }
 
-    private fun saveLogin(accessToken: String, expiresIn: Long) {
-        userController.insertUser(accessToken, expiresIn)
+    /**
+     * Salva o novo login no banco de dados interno
+     *
+     * @param accessToken token de acesso dado pela API
+     * @author joao.silva
+     */
+    private fun saveLogin(accessToken: String) {
+        userController.delete()
+        userController.insert(accessToken)
     }
 
+    /**
+     * Redireciona o usuário para o menu principal
+     *
+     * @author joao.silva
+     */
     private fun goToMenu() {
         val intent = Intent(activity, MenuActivity::class.java)
         activity.startActivity(intent)
         activity.finish()
     }
 
-    private fun goToLogin() {
+    /**
+     * Redireciona o usuário para a tela de login
+     *
+     * @author joao.silva
+     */
+    fun goToLogin() {
         val intent = Intent(activity, LoginActivity::class.java)
         activity.startActivity(intent)
         activity.finish()

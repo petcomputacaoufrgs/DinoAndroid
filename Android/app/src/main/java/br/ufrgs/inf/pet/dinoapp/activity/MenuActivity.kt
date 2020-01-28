@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import br.ufrgs.inf.pet.dinoapp.R
 import br.ufrgs.inf.pet.dinoapp.service.AuthService
+import br.ufrgs.inf.pet.dinoapp.service.GlossaryService
 
 
 /**
@@ -15,11 +16,15 @@ import br.ufrgs.inf.pet.dinoapp.service.AuthService
  */
 class MenuActivity : AppCompatActivity() {
 
+    private val glossaryService = GlossaryService(this)
     var username : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
+
+        // Busca atualizações no glossário em segundo plano
+        glossaryService.updateGlossaryIfNecessary()
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 

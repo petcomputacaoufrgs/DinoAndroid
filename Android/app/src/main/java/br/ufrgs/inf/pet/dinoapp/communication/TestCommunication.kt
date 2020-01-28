@@ -9,16 +9,37 @@ import retrofit2.http.Query
 
 /**
  * Testa a comunicação com a API
- * Created by joao.silva.
+ * Created by joao.silva
  */
 interface TestCommunication {
 
+    /**
+     * Teste de conexão via GET
+     *
+     * @param entry texto para teste
+     * @return TestCommunicationModel com o texto enviado como teste
+     * @author joao.silva
+     */
     @GET("test_connection/")
     fun testGet(@Query("entry") entry: String?): Call<TestCommunicationModel>
 
+    /**
+     * Teste de conexão via POST
+     *
+     * @param entry texto para teste
+     * @return TestCommunicationModel com o texto enviado como teste
+     * @author joao.silva
+     */
     @POST("test_connection/")
     fun testPost(@Query("entry") entry: String?): Call<TestCommunicationModel>
 
+    /**
+     * Teste de conexão via PUT
+     *
+     * @param entry texto para teste
+     * @return TestCommunicationModel com o texto enviado como teste
+     * @author joao.silva
+     */
     @PUT("test_connection/")
     fun testPut(@Query("entry") entry: String?): Call<TestCommunicationModel>
 

@@ -1,3 +1,8 @@
 package br.ufrgs.inf.pet.dinoapp.model.auth
 
-data class AuthResponseModel(val accessToken: String, val expireIn: Long)
+/**
+ * Model para receber dados de autenticação
+ *
+ * @author joao.silva
+ */
+data class AuthResponseModel(val accessToken: String)

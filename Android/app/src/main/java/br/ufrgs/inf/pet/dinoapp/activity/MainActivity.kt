@@ -4,7 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import br.ufrgs.inf.pet.dinoapp.R
-import br.ufrgs.inf.pet.dinoapp.database.UserController
+import br.ufrgs.inf.pet.dinoapp.database.user.UserController
+import br.ufrgs.inf.pet.dinoapp.service.AuthService
+import br.ufrgs.inf.pet.dinoapp.service.GlossaryService
 
 /**
  * Main screen, control the first redirection based on user login
@@ -12,30 +14,13 @@ import br.ufrgs.inf.pet.dinoapp.database.UserController
  */
 class MainActivity : AppCompatActivity() {
 
-    private val userController = UserController(this)
+    private val authService = AuthService(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val loginUser = userController.getUser()
-
-        if(loginUser == null || !loginUser.isValid()){
-            goToLogin()
-        } else {
-            goToMenu()
-        }
-    }
-
-    private fun goToMenu() {
-        val intent = Intent(this, MenuActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    private fun goToLogin() {
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
-        finish()
+        // Busca pelo login e toma ação apartir da resposta
+        authService.searchLogin()
     }
 }

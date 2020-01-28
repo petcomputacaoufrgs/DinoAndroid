@@ -17,7 +17,6 @@ import com.google.android.gms.common.SignInButton
 class LoginActivity : AppCompatActivity() {
 
     private val authService = AuthService(this)
-    val username : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
