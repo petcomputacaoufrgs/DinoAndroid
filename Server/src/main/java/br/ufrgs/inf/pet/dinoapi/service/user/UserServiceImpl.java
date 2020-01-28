@@ -41,7 +41,7 @@ public class UserServiceImpl implements  UserService {
     @Override
     public User findOneUserByAccessToken(String token) {
         if (token != null && token != "") {
-            return userRepository.findOneByAccessToken(token);
+            return userRepository.findFirstByAccessToken(token);
         }
         return null;
     }

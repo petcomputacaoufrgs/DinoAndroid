@@ -10,10 +10,6 @@ public class AuthRequestModel {
 
     public AuthRequestModel(){ }
 
-    public AuthRequestModel(String token) {
-        this.token = token;
-    }
-
     public String getToken() {
         return token;
     }

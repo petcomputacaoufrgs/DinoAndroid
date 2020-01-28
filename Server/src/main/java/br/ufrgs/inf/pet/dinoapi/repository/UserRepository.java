@@ -14,6 +14,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     User findOneByExternalId(String externalId);
 
-    User findOneByAccessToken(String accessToken);
+    User findFirstByAccessToken(String accessToken);
 
 }

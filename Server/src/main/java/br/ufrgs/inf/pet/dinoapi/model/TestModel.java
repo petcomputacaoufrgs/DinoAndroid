@@ -8,6 +8,8 @@ package br.ufrgs.inf.pet.dinoapi.model;
 public class TestModel {
     String texto;
 
+    public TestModel() {}
+
     public TestModel(String texto){
         this.texto = texto;
     }

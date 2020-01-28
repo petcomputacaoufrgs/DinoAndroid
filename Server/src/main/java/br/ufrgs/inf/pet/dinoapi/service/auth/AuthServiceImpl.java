@@ -70,7 +70,6 @@ public class AuthServiceImpl implements AuthService{
                 // Cria a resposta para o cliente
                 AuthResponseModel response = new AuthResponseModel();
                 response.setAccessToken(userDB.getAccessToken());
-                response.setExpireIn(userDB.getTokenExpiresDateInMillis());
 
                 return new ResponseEntity<>(response, HttpStatus.OK);
             } catch (IOException e) {

@@ -4,6 +4,8 @@ import br.ufrgs.inf.pet.dinoapi.entity.GlossaryItem;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Repositório da entidade: {@link GlossaryItem}
  *
@@ -15,5 +17,7 @@ public interface GlossaryItemRepository extends CrudRepository<GlossaryItem, Lon
     GlossaryItem findOneById(Long id);
 
     GlossaryItem findOneByTitle(String title);
+
+    List<GlossaryItem> findAllByExistsTrue();
 
 }

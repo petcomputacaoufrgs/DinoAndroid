@@ -8,7 +8,13 @@ package br.ufrgs.inf.pet.dinoapi.model.auth;
 public class UsernameResponseModel {
     String name;
 
+    public UsernameResponseModel() {}
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 }

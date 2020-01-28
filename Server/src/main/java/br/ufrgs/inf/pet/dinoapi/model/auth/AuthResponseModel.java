@@ -9,13 +9,13 @@ public class AuthResponseModel {
 
     String accessToken;
 
-    Long expireIn;
+    public AuthResponseModel() {}
 
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
     }
 
-    public void setExpireIn(Long expireIn) {
-        this.expireIn = expireIn;
+    public String getAccessToken() {
+        return accessToken;
     }
 }
