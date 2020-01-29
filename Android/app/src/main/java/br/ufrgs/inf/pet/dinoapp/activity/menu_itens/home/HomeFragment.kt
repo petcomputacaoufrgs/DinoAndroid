@@ -83,7 +83,6 @@ class HomeFragment : Fragment() {
                         val name = response.body()?.name
                         tvHello.text = "Olá $name!"
                         menuActivity.username = name
-                        setTextHello(menuActivity, tvHello)
                     } else {
                         Toast.makeText(activity, "Falha ao carregar dados do usuário", Toast.LENGTH_LONG).show()
                         authService.onSignOut()

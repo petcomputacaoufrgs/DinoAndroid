@@ -7,6 +7,7 @@ import android.widget.Toast
 import br.ufrgs.inf.pet.dinoapp.activity.LoginActivity
 import br.ufrgs.inf.pet.dinoapp.activity.MenuActivity
 import br.ufrgs.inf.pet.dinoapp.communication.RetrofitClient
+import br.ufrgs.inf.pet.dinoapp.database.user.User
 import br.ufrgs.inf.pet.dinoapp.database.user.UserController
 import br.ufrgs.inf.pet.dinoapp.model.auth.AuthRequestModel
 import br.ufrgs.inf.pet.dinoapp.model.auth.AuthResponseModel
@@ -35,7 +36,7 @@ class AuthService constructor(private val activity : Activity) {
      * @author joao.silva
      */
     fun searchLogin() {
-        val loginUser = userController.getUser()
+        val loginUser = userController.get()
 
         if(loginUser == null){
             goToLogin()
@@ -135,7 +136,8 @@ class AuthService constructor(private val activity : Activity) {
      */
     private fun saveLogin(accessToken: String) {
         userController.delete()
-        userController.insert(accessToken)
+        val user = User(accessToken)
+        userController.insert(user)
     }
 
     /**

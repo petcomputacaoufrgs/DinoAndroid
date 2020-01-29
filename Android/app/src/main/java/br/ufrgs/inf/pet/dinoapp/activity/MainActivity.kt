@@ -1,12 +1,9 @@
 package br.ufrgs.inf.pet.dinoapp.activity
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import br.ufrgs.inf.pet.dinoapp.R
-import br.ufrgs.inf.pet.dinoapp.database.user.UserController
 import br.ufrgs.inf.pet.dinoapp.service.AuthService
-import br.ufrgs.inf.pet.dinoapp.service.GlossaryService
 
 /**
  * Main screen, control the first redirection based on user login

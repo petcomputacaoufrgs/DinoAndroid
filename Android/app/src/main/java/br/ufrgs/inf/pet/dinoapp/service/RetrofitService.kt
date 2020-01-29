@@ -7,8 +7,6 @@ import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.time.Duration
-import java.util.concurrent.TimeUnit
 
 /**
  * Fábrica de conexão do Retrofit
@@ -16,9 +14,8 @@ import java.util.concurrent.TimeUnit
  */
 class RetrofitService constructor(private val activity : Activity){
 
-    private var baseURL = "https://acd626a5.ngrok.io"
-    private val userController =
-        UserController(activity)
+    private var baseURL = "https://7f846c8e.ngrok.io"
+    private val userController = UserController(activity)
 
 
     /**
@@ -29,16 +26,15 @@ class RetrofitService constructor(private val activity : Activity){
      * @author joao.silva
      */
     fun getAuthHttpClient() : OkHttpClient {
-        val userController =
-            UserController(activity)
-        var loginUser = userController.getUser()
+        val userController = UserController(activity)
+        val loginUser = userController.get()
 
         if (loginUser != null && loginUser.token != "") {
             return OkHttpClient.Builder()
                 .addInterceptor { chain ->
                     val original = chain.request()
 
-                    val requestBuilder = original.newBuilder().addHeader("Authorization", "Bearer " + loginUser!!.token)
+                    val requestBuilder = original.newBuilder().addHeader("Authorization", "Bearer " + loginUser.token)
                         .method(original.method(), original.body())
 
                     val request = requestBuilder.build()
@@ -50,13 +46,9 @@ class RetrofitService constructor(private val activity : Activity){
                     if (header != null) {
                         val newToken = header.substring(7)
 
-                        val loginUser = userController.getUser()
+                        loginUser.token = newToken
 
-                        if (loginUser != null) {
-                            loginUser.token = newToken
-
-                            userController.insert(loginUser)
-                        }
+                        userController.insert(loginUser)
                     }
 
                     response
@@ -104,7 +96,7 @@ class RetrofitService constructor(private val activity : Activity){
      * @author joao.silva
      */
     fun getRetrofitFactory() : Retrofit{
-        val loginUser = userController.getUser()
+        val loginUser = userController.get()
 
         return if (loginUser != null && loginUser.token != "") {
             getRetrofitFactoryWithAuth()

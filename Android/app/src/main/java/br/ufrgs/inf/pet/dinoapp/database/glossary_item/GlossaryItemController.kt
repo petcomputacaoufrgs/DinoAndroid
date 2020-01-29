@@ -55,7 +55,6 @@ class GlossaryItemController(context: Context?) : DefaultController(context) {
         openDataBase()
         dontCloseDataBase = true
         val cursor: Cursor?
-        val glossaryVersion: GlossaryVersion
         val fields = arrayOf(Database.TEXT, Database.TITLE)
         cursor = dataBaseSystem!!.query(
             Database.GLOSSARY_ITEM_TABLE,
@@ -75,15 +74,11 @@ class GlossaryItemController(context: Context?) : DefaultController(context) {
 
                     while(!cursor.isAfterLast) {
                         val glossaryItem = GlossaryItem(
-                            cursor.getString(0), cursor.getString(0))
+                            cursor.getString(0), cursor.getString(1))
 
                         items.add(glossaryItem)
                         cursor.moveToNext()
                     }
-
-                    glossaryVersion = GlossaryVersion(
-                        cursor.getLong(0)
-                    )
 
                     return items
                 }
@@ -91,7 +86,7 @@ class GlossaryItemController(context: Context?) : DefaultController(context) {
             }
             null
         } catch (e: SQLiteException) {
-            Log.d("SQL Error", e.message)
+            Log.d("SQL Error", e.message!!)
             null
         } finally {
             cursor.close()

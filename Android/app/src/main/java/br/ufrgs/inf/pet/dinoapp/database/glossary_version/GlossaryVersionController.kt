@@ -11,7 +11,7 @@ import br.ufrgs.inf.pet.dinoapp.database.DefaultController
 /**
  * Classe para controlar a leitura e escrita da versão do glossário no banco
  *
- * Created by joao.silva.
+ * @author joao.silva.
  */
 class GlossaryVersionController(context: Context?) : DefaultController(context) {
 

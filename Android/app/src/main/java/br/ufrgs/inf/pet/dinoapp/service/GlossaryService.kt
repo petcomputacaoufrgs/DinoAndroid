@@ -123,17 +123,11 @@ class GlossaryService constructor(private val activity : Activity) {
             val savedItemsCount = glossaryItemController.insert(glossaryModel)
 
             if (savedItemsCount == glossaryModel.itemList.size) {
-                Toast.makeText(activity, "Glossário atualizado para a versão " + glossaryModel.version + ".", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Glossário atualizado para a versão " + glossaryModel.version, Toast.LENGTH_SHORT).show()
             } else if(oldVersion != null){ // Retorna a versão antiga devido a falha na atualização total
                 glossaryVersion.version = oldVersion.version
                 glossaryVersionController.insert(glossaryVersion)
                 tryAgainMessage()
-            }
-
-            // Teste
-            val retorno = getGlossary()
-            if (retorno != null) {
-                Toast.makeText(activity, "Sucesso!", Toast.LENGTH_SHORT).show()
             }
         } else {
             Toast.makeText(activity, "Falha ao salvar atualização do glossário.", Toast.LENGTH_SHORT).show()
