@@ -43,6 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/auth/google/").permitAll()
                 .antMatchers("/test_connection/").permitAll()
                 .antMatchers("/glossary/update/").permitAll()
+                .antMatchers("/glossary/update/").permitAll()
                 .anyRequest().authenticated()
                 .and().cors()
                 .and().csrf().disable()

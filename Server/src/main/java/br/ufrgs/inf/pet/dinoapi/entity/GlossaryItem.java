@@ -38,7 +38,7 @@ public class GlossaryItem implements Serializable {
     @Basic(optional = false)
     @NotNull(message = "Texto não pode ser nulo.")
     @Size(min = 0, max = 1000, message = "O texto deve conter entre 0 e 1000 caracteres.")
-    @Column(name = "text", length = 100)
+    @Column(name = "text", length = 1000)
     private String text;
 
     @Basic(optional = false)
