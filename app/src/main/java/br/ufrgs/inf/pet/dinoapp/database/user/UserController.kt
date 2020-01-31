@@ -76,7 +76,6 @@ class UserController(context: Context?) : DefaultController(context) {
             }
             null
         } catch (e: SQLiteException) {
-            Log.d("SQL Error", e.message)
             null
         } finally {
             cursor.close()
