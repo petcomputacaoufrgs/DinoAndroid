@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 class RetrofitService constructor(private val activity : Activity){
 
-    private var baseURL = "https://7f846c8e.ngrok.io"
+    private var baseURL = "https://pet-dino-server.herokuapp.com"
     private val userController = UserController(activity)
 
 
