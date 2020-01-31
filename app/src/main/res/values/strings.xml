@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">DinoAPP</string>
+    <string name="main_carregando">Carregando...</string>
+    <string name="descricao_logo">Logo com o nome DinoAPP.</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="title_home">Dino</string>
+    <string name="title_dashboard">Jogos</string>
+    <string name="title_notifications">Mais</string>
+    <string name="dinogosh_menu_button">DINOGOSH</string>
+    <string name="logout">Sair</string>
+</resources>
