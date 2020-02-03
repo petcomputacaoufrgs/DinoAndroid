@@ -12,7 +12,7 @@ import com.google.android.gms.common.api.Scope
  */
 class GoogleSignInService {
 
-    private val clientId = "467762039422-lgajbj314vd4ehfq51n8h7abear3pcjk.apps.googleusercontent.com"
+    private val clientId = "467762039422-b4uo6jc6ioprna4r1sgauhos5inkj475.apps.googleusercontent.com"
 
     /**
      * Gera uma instância do GoogleSignInOptions com os dados do aplicativo e com as permissões necessárias.
