@@ -2,4 +2,7 @@
 <resources>
     <dimen name="medium_distance">64dp</dimen>
     <dimen name="large_distance">96dp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_medium">20sp</dimen>
+    <dimen name="text_size_large">24sp</dimen>
 </resources>

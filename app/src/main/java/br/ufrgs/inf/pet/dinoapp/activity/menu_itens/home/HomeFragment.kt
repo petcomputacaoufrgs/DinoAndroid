@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import br.ufrgs.inf.pet.dinoapp.R
-import br.ufrgs.inf.pet.dinoapp.activity.MenuActivity
+import br.ufrgs.inf.pet.dinoapp.activity.menu.MainMenuActivity
 import br.ufrgs.inf.pet.dinoapp.communication.RetrofitClient
 import br.ufrgs.inf.pet.dinoapp.model.auth.UsernameModel
 import br.ufrgs.inf.pet.dinoapp.service.AuthService
@@ -59,7 +59,7 @@ class HomeFragment : Fragment() {
         val menuActivity = requireActivity()
         val tvHello: TextView = root.findViewById(R.id.tv_hello)
 
-        if (menuActivity is MenuActivity) {
+        if (menuActivity is MainMenuActivity) {
             if (menuActivity.username != null) {
                 val username = menuActivity.username
                 tvHello.text = "Olá $username !"
@@ -69,7 +69,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setTextHello(menuActivity: MenuActivity, tvHello: TextView) {
+    private fun setTextHello(mainMenuActivity: MainMenuActivity, tvHello: TextView) {
         val retrofitClient = RetrofitClient(requireActivity())
 
         retrofitClient.auth.name()
@@ -82,7 +82,7 @@ class HomeFragment : Fragment() {
                     if (response.isSuccessful) {
                         val name = response.body()?.name
                         tvHello.text = "Olá $name!"
-                        menuActivity.username = name
+                        mainMenuActivity.username = name
                     } else {
                         Toast.makeText(activity, "Falha ao carregar dados do usuário", Toast.LENGTH_LONG).show()
                         authService.onSignOut()

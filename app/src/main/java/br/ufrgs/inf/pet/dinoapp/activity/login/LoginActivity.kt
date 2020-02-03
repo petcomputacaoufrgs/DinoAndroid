@@ -1,4 +1,4 @@
-package br.ufrgs.inf.pet.dinoapp.activity
+package br.ufrgs.inf.pet.dinoapp.activity.login
 
 import android.content.Intent
 import android.os.Bundle

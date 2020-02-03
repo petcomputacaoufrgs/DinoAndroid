@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="@dimen/fragment_bottom_menu_margin"
+    android:background="@color/colorPrimary"
+    tools:context=".activity.menu_itens.">
+
+    <RelativeLayout
+        android:id="@+id/glossary_search_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="1dp"
+        android:outlineAmbientShadowColor="#00923131"
+        android:paddingStart="@dimen/glossary_search_bar_padding"
+        android:paddingTop="@dimen/glossary_search_bar_padding_top_bottom"
+        android:paddingEnd="@dimen/glossary_search_bar_padding"
+        android:paddingBottom="@dimen/glossary_search_bar_padding_top_bottom"
+        android:translationZ="1dp">
+
+        <EditText
+            android:id="@+id/glossary_ed_search"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/glossary_filter_height"
+            android:background="@drawable/glossary_card"
+            android:drawableLeft="@drawable/ic_search_black_24dp"
+            android:paddingStart="@dimen/glossary_search_bar_text_start"
+            android:paddingEnd="@dimen/glossary_search_bar_text_start" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/glossary_item_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/glossary_search_box" />
+</RelativeLayout>

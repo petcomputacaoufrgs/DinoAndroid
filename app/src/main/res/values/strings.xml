@@ -5,7 +5,8 @@
     <string name="title_activity_menu">MenuActivity</string>
     <string name="title_home">Dino</string>
     <string name="title_dashboard">Jogos</string>
-    <string name="title_notifications">Mais</string>
+    <string name="title_notifications">Glossário</string>
     <string name="dinogosh_menu_button">DINOGOSH</string>
     <string name="logout">Sair</string>
+    <string name="glossario_definicao_default">Sem definição.</string>
 </resources>

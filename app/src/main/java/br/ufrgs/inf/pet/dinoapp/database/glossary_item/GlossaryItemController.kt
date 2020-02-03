@@ -32,8 +32,8 @@ class GlossaryItemController(context: Context?) : DefaultController(context) {
         var successCount = 0
         for (glossaryItemModel in glossaryModel.itemList) {
             val values = ContentValues()
-            values.put(Database.TEXT, glossaryItemModel.text)
             values.put(Database.TITLE, glossaryItemModel.title)
+            values.put(Database.TEXT, glossaryItemModel.text)
             result = dataBaseSystem!!.insert(Database.GLOSSARY_ITEM_TABLE, null, values)
             if (result != -1L) {
                 successCount++
@@ -55,7 +55,7 @@ class GlossaryItemController(context: Context?) : DefaultController(context) {
         openDataBase()
         dontCloseDataBase = true
         val cursor: Cursor?
-        val fields = arrayOf(Database.TEXT, Database.TITLE)
+        val fields = arrayOf(Database.TITLE, Database.TEXT)
         cursor = dataBaseSystem!!.query(
             Database.GLOSSARY_ITEM_TABLE,
             fields,

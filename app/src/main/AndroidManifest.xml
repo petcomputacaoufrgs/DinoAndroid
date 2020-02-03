@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.MenuActivity"
+            android:name="br.ufrgs.inf.pet.dinoapp.activity.menu.MainMenuActivity"
             android:label="@string/title_activity_menu"></activity>
         <activity android:name=".activity.MainActivity">
             <intent-filter>
@@ -21,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.LoginActivity"></activity>
+        <activity android:name="br.ufrgs.inf.pet.dinoapp.activity.login.LoginActivity"></activity>
     </application>
 
 </manifest>

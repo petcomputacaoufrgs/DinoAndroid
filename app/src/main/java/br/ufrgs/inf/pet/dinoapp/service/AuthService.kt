@@ -4,8 +4,8 @@ package br.ufrgs.inf.pet.dinoapp.service
 import android.app.Activity
 import android.content.Intent
 import android.widget.Toast
-import br.ufrgs.inf.pet.dinoapp.activity.LoginActivity
-import br.ufrgs.inf.pet.dinoapp.activity.MenuActivity
+import br.ufrgs.inf.pet.dinoapp.activity.login.LoginActivity
+import br.ufrgs.inf.pet.dinoapp.activity.menu.MainMenuActivity
 import br.ufrgs.inf.pet.dinoapp.communication.RetrofitClient
 import br.ufrgs.inf.pet.dinoapp.database.user.User
 import br.ufrgs.inf.pet.dinoapp.database.user.UserController
@@ -39,9 +39,9 @@ class AuthService constructor(private val activity : Activity) {
         val loginUser = userController.get()
 
         if(loginUser == null){
-            goToLogin()
+            onSignOut()
         } else {
-            goToMenu()
+            goToMainMenu()
         }
     }
 
@@ -115,7 +115,7 @@ class AuthService constructor(private val activity : Activity) {
                     ) {
                         if (response.isSuccessful && response.body() != null) {
                             saveLogin(response.body()!!.accessToken)
-                            goToMenu()
+                            goToMainMenu()
                         } else {
                             Toast.makeText(activity, "Falha na autenticação com a API.", Toast.LENGTH_SHORT).show()
                             onSignOut()
@@ -145,8 +145,8 @@ class AuthService constructor(private val activity : Activity) {
      *
      * @author joao.silva
      */
-    private fun goToMenu() {
-        val intent = Intent(activity, MenuActivity::class.java)
+    private fun goToMainMenu() {
+        val intent = Intent(activity, MainMenuActivity::class.java)
         activity.startActivity(intent)
         activity.finish()
     }

@@ -13,13 +13,11 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="br.ufrgs.inf.pet.dinoapp.activity.menu_itens.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:name="br.ufrgs.inf.pet.dinoapp.activity.menu_itens.notifications.NotificationsFragment"
+        android:label="@string/title_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="br.ufrgs.inf.pet.dinoapp.activity.menu_itens.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_glossary"
+        android:name="br.ufrgs.inf.pet.dinoapp.activity.menu_itens.glossary.GlossaryFragment"
+        android:label="@string/title_notifications" />
 </navigation>
